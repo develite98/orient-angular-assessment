@@ -1,1 +1,7 @@
-<p>form-builder works!</p>
+<div class="form-builder-page">
+  <button tuiButton type="button" (click)="showQuestionBuilderDialog(questionBuilder)">Add new question</button>
+</div>
+
+<ng-template #questionBuilder let-observer>
+    <app-form-question-builder-dialog></app-form-question-builder-dialog>
+</ng-template>
