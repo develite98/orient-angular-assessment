@@ -1,1 +1,30 @@
-<p>form-answer works!</p>
+<div class="form-answer">
+    <div class="form-answer__title">
+        Your answer: 
+    </div>
+
+    <div class="form-answer__question-container">
+        <ul class="tui-list tui-list_large">
+            <li class="tui-list__item" *ngFor="let answer of answerReviews; index as i">
+                <strong> Question {{ i + 1 }}: </strong>{{ answer.questionTitle }}
+
+                <ng-container *ngIf="answer.answerValue.length > 0">
+                    <ul class="tui-list tui-list_linear tui-list_nested">
+                        <li class="tui-list__item" *ngFor="let value of answer.answerValue">
+                            {{ value }}
+                        </li>
+                    </ul>
+                </ng-container>
+            </li>
+        </ul>
+    </div>
+
+    <div class="form-answer__toolbar">
+        <button
+          tuiButton
+          type="button"
+          (click)="backToFormBuilder()">
+          Back to form builder
+        </button>
+    </div>
+</div>

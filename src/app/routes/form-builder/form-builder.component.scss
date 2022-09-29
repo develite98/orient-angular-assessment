@@ -4,4 +4,40 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+
+    &__question-container {
+        width: 500px;
+    }
+
+    &__empty {
+        width: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        font-size: 14px;
+        color: rgba(1, 1, 1, 0.7);
+    }
+
+    .question {
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        margin-top: 8px;
+        border-bottom: 1px solid rgba(1, 1, 1, 0.3);
+
+        &__title {
+            margin-bottom: 8px;
+        }
+    }
+
+
+    &__toolbar {
+        margin-top: 48px;
+        display: flex;
+
+        button:nth-child(2) {
+            margin-left: 100px;
+        }
+    }
 }

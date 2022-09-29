@@ -83,7 +83,7 @@ export class FormQuestionBuilderDialogComponent {
         title: rawFormValue.title,
         type: rawFormValue.type,
         isRequired: rawFormValue.isRequired,
-        options: rawFormValue.options.map((value: string) => ({ value: value }))
+        options: rawFormValue.options
       };
 
       this.questionService.addQuestion(question);

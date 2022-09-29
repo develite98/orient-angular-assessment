@@ -1,11 +1,15 @@
-import { QuestionOption } from './question-option.model';
 
 export interface Question {
   id: string;
   title: string;
   type: QuestionType;
-  options?: QuestionOption[];
+  options: string[];
   isRequired?: boolean;
+}
+
+export interface QuestionAnswer {
+  questionId: string;
+  answerValue: string[] | string;
 }
 
 export enum QuestionType {

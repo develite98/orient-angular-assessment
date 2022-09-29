@@ -1,8 +1,77 @@
-<div class="form-builder-page">
-  <div class="form-builder-page__empty"></div>
-  <button tuiButton type="button" (click)="showQuestionBuilderDialog(questionBuilder)">Add new question</button>
+<div class="form-builder-page" *ngIf="questions | async as questions">
+  <ng-template #empty>
+    <div class="form-builder-page__empty">
+      There is no question added, please add your question !
+    </div>
+  </ng-template>
+  <div
+    class="form-builder-page__question-container"
+    *ngIf="questions.length > 0; else empty"
+  >
+    <h3>Your questions:</h3>
+    <ng-container *ngFor="let question of questions; index as i">
+      <div class="question">
+        <div class="question__title">
+          Question {{ i + 1 }}: {{ question.title }}
+        </div>
+
+        <div class="question__asnwer">
+          <ng-container *ngIf="question.type === 'Checkbox'">
+            <tui-multi-select
+              placeholder="Select your answers"
+              [formControl]="$any(questionAnswerById(question.id))"
+              [editable]="false"
+            >
+              Select your option
+              <tui-data-list-wrapper
+                *tuiDataList
+                tuiMultiSelectGroup
+                [items]="question.options"
+              ></tui-data-list-wrapper>
+            </tui-multi-select>
+          </ng-container>
+
+          <ng-container *ngIf="question.type === 'Pagragraph'">
+            <tui-text-area
+              [formControl]="$any(questionAnswerById(question.id))"
+              [expandable]="true"
+            >
+              Type your title
+            </tui-text-area>
+          </ng-container>
+
+          <tui-error
+            [formControl]="$any(questionAnswerById(question.id))"
+            [error]="[] | tuiFieldError | async"
+          ></tui-error>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="form-builder-page__toolbar">
+    <button
+      tuiButton
+      [appearance]="questions.length > 0 ? 'outline' : 'primary'"
+      type="button"
+      (click)="showQuestionBuilderDialog(questionBuilder)"
+    >
+      Add new question
+    </button>
+
+    <button
+      tuiButton
+      *ngIf="questions.length > 0"
+      type="button"
+      (click)="submitAnswer()"
+    >
+      Submit your answers
+    </button>
+  </div>
 </div>
 
 <ng-template #questionBuilder let-observer>
-    <app-form-question-builder-dialog (complete)="observer.complete()"></app-form-question-builder-dialog>
+  <app-form-question-builder-dialog
+    (complete)="observer.complete()"
+  ></app-form-question-builder-dialog>
 </ng-template>
