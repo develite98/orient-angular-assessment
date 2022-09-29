@@ -1,0 +1,28 @@
+.question-builder {
+    &__title {
+        margin-bottom: 32px;
+        font-size: 1.5rem;
+    }
+
+    &__toolbar {
+        width: 100%;
+        margin-top: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    &__label {
+        margin-top: 16px;
+    }
+
+    &__option-container {
+        .input {
+            margin: 4px 0px;
+        }
+    }
+
+    &__sub-description {
+        color: var(--tui-text-03);
+    }
+}

@@ -1,1 +1,76 @@
-<p>form-question-builder-dialog works!</p>
+<div class="question-builder" [formGroup]="questionForm">
+  <div class="question-builder__title">Add new question</div>
+
+  <div class="question-builder__label">Choose your question type:</div>
+  <div tuiGroup class="group" [collapsed]="true">
+    <tui-radio-block
+      contentAlign="right"
+      formControlName="type"
+      item="Pagragraph"
+      size="l"
+    >
+      Pagragraph
+    </tui-radio-block>
+    <tui-radio-block
+      contentAlign="right"
+      formControlName="type"
+      item="Checkbox"
+      size="l"
+    >
+      Checkbox
+    </tui-radio-block>
+  </div>
+
+  <div class="question-builder__label">Question title:</div>
+  <tui-text-area formControlName="title" [expandable]="true">
+    Type your title
+  </tui-text-area>
+  <tui-error
+    formControlName="title"
+    [error]="[] | tuiFieldError | async"
+  ></tui-error>
+
+  <ng-container *ngIf="isCheckBox">
+    <div class="question-builder__label">Question answer options:</div>
+    <div class="question-builder__option-container">
+      <div
+        class="input"
+        *ngFor="let control of answerOptions.controls; index as i">
+        <tui-input [formControl]="$any(answerOptions.controls[i])">
+          Type your asnwer
+          <input tuiTextfield />
+        </tui-input>
+
+        <tui-error
+          [formControl]="$any(answerOptions.controls[i])"
+          [error]="[] | tuiFieldError | async"
+        ></tui-error>
+      </div>
+    </div>
+
+    <button
+      tuiButton
+      type="button"
+      [size]="'s'"
+      [appearance]="'outline'"
+      (click)="addNewAnswerOption()"
+      *ngIf="canAddOption"
+    >
+      + Add another answer
+    </button>
+  </ng-container>
+
+  <div class="question-builder__label">Optional:</div>
+  <tui-checkbox-labeled formControlName="isRequired">
+    This field is required
+    <div class="question-builder__sub-description">
+      User need to answer this question
+    </div>
+  </tui-checkbox-labeled>
+
+  <div class="question-builder__toolbar">
+    <button tuiButton type="button" (click)="addQuestion()">
+      Add question
+    </button>
+  </div>
+</div>

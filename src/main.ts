@@ -13,6 +13,7 @@ import {
   TUI_SANITIZER,
 } from '@taiga-ui/core';
 import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
+import { TUI_VALIDATION_ERRORS } from '@taiga-ui/kit';
 
 if (environment.production) {
   enableProdMode();
@@ -21,6 +22,14 @@ if (environment.production) {
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: TUI_SANITIZER, useClass: NgDompurifySanitizer },
+    {
+      provide: TUI_VALIDATION_ERRORS,
+      useValue: {
+        required: 'This field is required',
+        email: 'Pleas enter a valid email',
+        confirm: 'Password confirm incorrect'
+      }
+    },
     importProvidersFrom(
       BrowserAnimationsModule,
       AppRoutingModule,

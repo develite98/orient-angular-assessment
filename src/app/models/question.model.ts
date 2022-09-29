@@ -5,6 +5,7 @@ export interface Question {
   title: string;
   type: QuestionType;
   options?: QuestionOption[];
+  isRequired?: boolean;
 }
 
 export enum QuestionType {

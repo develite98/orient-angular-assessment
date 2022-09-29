@@ -1,7 +1,8 @@
 <div class="form-builder-page">
+  <div class="form-builder-page__empty"></div>
   <button tuiButton type="button" (click)="showQuestionBuilderDialog(questionBuilder)">Add new question</button>
 </div>
 
 <ng-template #questionBuilder let-observer>
-    <app-form-question-builder-dialog></app-form-question-builder-dialog>
+    <app-form-question-builder-dialog (complete)="observer.complete()"></app-form-question-builder-dialog>
 </ng-template>
